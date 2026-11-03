@@ -1,0 +1,166 @@
+---
+import { previewMenus } from '../data/preview';
+
+interface Props {
+  bilingual?: boolean;
+}
+
+const { bilingual = true } = Astro.props;
+---
+
+<section id="menu" aria-labelledby="h-menu" style="background:#E3E8DA;padding:clamp(64px,10vw,128px) clamp(16px,4vw,64px)">
+  <div style="max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px clamp(48px,6vw,96px)">
+    <div data-reveal="" style="flex:4 1 300px;min-width:0">
+      <p style="margin:0 0 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">Menu · 22 lists</p>
+      <h2 id="h-menu" style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(2.25rem,4.4vw,4rem);line-height:1.05;letter-spacing:-0.025em;text-wrap:balance">Twenty-two lists, one kitchen.</h2>
+      {bilingual && <p lang="hi" style="margin:16px 0 0;font-size:20px;font-weight:500;color:#0F3A2B">वेज और नॉन-वेज, दोनों।</p>}
+      <p style="margin:24px 0 0;max-width:40ch;color:#4B5B51">From momo to biryani to hand-tossed pizza. Here are two of the lists; the rest are one tap away.</p>
+      <div style="display:flex;gap:24px;margin-top:32px;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#4B5B51">
+        <span style="display:inline-flex;align-items:center;gap:8px">
+          <span aria-hidden="true" style="width:14px;height:14px;border:1.5px solid #2F7D3A;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box">
+            <span style="width:6px;height:6px;border-radius:50%;background:#2F7D3A"></span>
+          </span>
+          Veg
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:8px">
+          <span aria-hidden="true" style="width:14px;height:14px;border:1.5px solid #8A3A1E;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box">
+            <span style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid #8A3A1E"></span>
+          </span>
+          Non-veg
+        </span>
+      </div>
+    </div>
+
+    <div data-reveal="" style="flex:7 1 440px;min-width:0">
+      <div role="tablist" aria-label="Menu preview" style="display:flex;gap:4px;overflow-x:auto">
+        <button
+          role="tab"
+          id="tab-starters"
+          aria-selected="true"
+          aria-controls="panel-starters"
+          data-tab="starters"
+          style="min-height:48px;padding:0 24px;border:0;border-radius:16px 16px 0 0;cursor:pointer;font-family:'Mukta',sans-serif;font-size:15px;font-weight:600;white-space:nowrap;background:#FBF8F1;color:#15291F"
+        >
+          {previewMenus.starters.label}
+        </button>
+        <button
+          role="tab"
+          id="tab-drinks"
+          aria-selected="false"
+          aria-controls="panel-drinks"
+          data-tab="drinks"
+          style="min-height:48px;padding:0 24px;border:0;border-radius:16px 16px 0 0;cursor:pointer;font-family:'Mukta',sans-serif;font-size:15px;font-weight:600;white-space:nowrap;background:rgba(21,41,31,0.06);color:#4B5B51"
+        >
+          {previewMenus.drinks.label}
+        </button>
+        <a href="/menu" style="display:inline-flex;align-items:center;min-height:48px;padding:0 20px;font-size:15px;font-weight:600;color:#0F3A2B;white-space:nowrap">All 22 lists →</a>
+      </div>
+
+      <!-- Starters panel -->
+      <div
+        id="panel-starters"
+        role="tabpanel"
+        aria-labelledby="tab-starters"
+        data-panel="starters"
+        style="background:#FBF8F1;border-radius:0 16px 16px 16px;padding:clamp(24px,4vw,48px);box-shadow:0 24px 48px -32px rgba(21,41,31,0.4)"
+      >
+        {previewMenus.starters.items.map((it) => {
+          const veg = it.t === 'veg';
+          const c = veg ? '#2F7D3A' : '#8A3A1E';
+          return (
+            <div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:20px 0;border-bottom:1px solid rgba(21,41,31,0.1)">
+              <span
+                aria-label={veg ? 'Veg' : 'Non-veg'}
+                style={`width:14px;height:14px;border:1.5px solid ${c};display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;transform:translateY(2px)`}
+              >
+                {veg ? (
+                  <span style={`width:6px;height:6px;border-radius:50%;background:${c}`} />
+                ) : (
+                  <span style={`width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid ${c}`} />
+                )}
+              </span>
+              <span style="font-family:'Young Serif',serif;font-size:clamp(19px,2vw,22px);line-height:1.25">{it.name}</span>
+              <span style="font-weight:600;font-variant-numeric:tabular-nums;font-size:17px;text-align:right">{it.price}</span>
+              <span></span>
+              <span style="font-size:15px;color:#4B5B51;line-height:1.5">{it.desc}</span>
+              <span></span>
+            </div>
+          );
+        })}
+        <p style="margin:24px 0 0;font-size:15px;color:#4B5B51">
+          {previewMenus.starters.more} · <a href="/menu" style="font-weight:600">see the full list</a>
+        </p>
+      </div>
+
+      <!-- Drinks panel -->
+      <div
+        id="panel-drinks"
+        role="tabpanel"
+        aria-labelledby="tab-drinks"
+        data-panel="drinks"
+        style="display:none;background:#FBF8F1;border-radius:0 16px 16px 16px;padding:clamp(24px,4vw,48px);box-shadow:0 24px 48px -32px rgba(21,41,31,0.4)"
+      >
+        {previewMenus.drinks.items.map((it) => {
+          const veg = it.t === 'veg';
+          const c = veg ? '#2F7D3A' : '#8A3A1E';
+          return (
+            <div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:20px 0;border-bottom:1px solid rgba(21,41,31,0.1)">
+              <span
+                aria-label={veg ? 'Veg' : 'Non-veg'}
+                style={`width:14px;height:14px;border:1.5px solid ${c};display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;transform:translateY(2px)`}
+              >
+                {veg ? (
+                  <span style={`width:6px;height:6px;border-radius:50%;background:${c}`} />
+                ) : (
+                  <span style={`width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid ${c}`} />
+                )}
+              </span>
+              <span style="font-family:'Young Serif',serif;font-size:clamp(19px,2vw,22px);line-height:1.25">{it.name}</span>
+              <span style="font-weight:600;font-variant-numeric:tabular-nums;font-size:17px;text-align:right">{it.price}</span>
+              <span></span>
+              <span style="font-size:15px;color:#4B5B51;line-height:1.5">{it.desc}</span>
+              <span></span>
+            </div>
+          );
+        })}
+        <p style="margin:24px 0 0;font-size:15px;color:#4B5B51">
+          {previewMenus.drinks.more} · <a href="/menu" style="font-weight:600">see the full list</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupPreviewTabs() {
+    const tabStarters = document.getElementById('tab-starters');
+    const tabDrinks = document.getElementById('tab-drinks');
+    const panelStarters = document.getElementById('panel-starters');
+    const panelDrinks = document.getElementById('panel-drinks');
+
+    if (!tabStarters || !tabDrinks || !panelStarters || !panelDrinks) return;
+
+    function selectTab(which: 'starters' | 'drinks') {
+      const isStarters = which === 'starters';
+      tabStarters.setAttribute('aria-selected', isStarters ? 'true' : 'false');
+      tabStarters.style.background = isStarters ? '#FBF8F1' : 'rgba(21,41,31,0.06)';
+      tabStarters.style.color = isStarters ? '#15291F' : '#4B5B51';
+      panelStarters.style.display = isStarters ? 'block' : 'none';
+
+      tabDrinks.setAttribute('aria-selected', !isStarters ? 'true' : 'false');
+      tabDrinks.style.background = !isStarters ? '#FBF8F1' : 'rgba(21,41,31,0.06)';
+      tabDrinks.style.color = !isStarters ? '#15291F' : '#4B5B51';
+      panelDrinks.style.display = !isStarters ? 'block' : 'none';
+    }
+
+    tabStarters.addEventListener('click', () => selectTab('starters'));
+    tabDrinks.addEventListener('click', () => selectTab('drinks'));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupPreviewTabs);
+  } else {
+    setupPreviewTabs();
+  }
+</script>
+

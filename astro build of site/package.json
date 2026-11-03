@@ -1,0 +1,15 @@
+{
+  "name": "the-town-house",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node node_modules/astro/bin/astro.mjs dev",
+    "build": "node node_modules/astro/bin/astro.mjs build",
+    "preview": "node node_modules/astro/bin/astro.mjs preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.4",
+    "astro": "^7.4.5",
+    "tailwindcss": "^4.3.4"
+  }
+}

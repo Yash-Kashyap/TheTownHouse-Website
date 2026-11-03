@@ -1,0 +1,45 @@
+---
+interface Props {
+  page?: 'landing' | 'menu';
+}
+
+const { page = 'landing' } = Astro.props;
+---
+
+<nav
+  aria-label="Quick actions"
+  class="fixed left-2 right-2 bottom-2 z-50 bg-[#15291F] rounded-full p-1.5 grid grid-cols-[1.4fr_1fr_1fr] gap-1 shadow-[0_16px_32px_-12px_rgba(0,0,0,0.5)] block min-[760px]:hidden"
+>
+  <a
+    href="tel:+919882990174"
+    class="flex items-center justify-center min-h-[48px] rounded-full bg-[#C4441E] text-[#FFF9F2] font-semibold text-[15px] no-underline"
+  >
+    Call
+  </a>
+  <a
+    href="https://www.google.com/maps/dir/?api=1&destination=The+Town+House+MC+Complex+Delhi+Gate+Nahan"
+    target="_blank"
+    rel="noopener"
+    class="flex items-center justify-center min-h-[48px] rounded-full text-[#F3EEE3] font-semibold text-[15px] no-underline"
+  >
+    Directions
+  </a>
+  {page === 'landing' ? (
+    <a
+      href="/menu"
+      class="flex items-center justify-center min-h-[48px] rounded-full text-[#F3EEE3] font-semibold text-[15px] no-underline"
+    >
+      Menu
+    </a>
+  ) : (
+    <a
+      href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center justify-center min-h-[48px] rounded-full text-[#F3EEE3] font-semibold text-[15px] no-underline"
+    >
+      Zomato
+    </a>
+  )}
+</nav>
+

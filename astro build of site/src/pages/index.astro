@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import HeroNotes from '../components/HeroNotes.astro';
+import HeroClock from '../components/HeroClock.astro';
+import OpenNowCard from '../components/OpenNowCard.astro';
+import ChapterDay from '../components/ChapterDay.astro';
+import MenuPreview from '../components/MenuPreview.astro';
+import RoomCollage from '../components/RoomCollage.astro';
+import ReviewWall from '../components/ReviewWall.astro';
+import Parties from '../components/Parties.astro';
+import Visit from '../components/Visit.astro';
+import Footer from '../components/Footer.astro';
+import QuickBar from '../components/QuickBar.astro';
+
+// Configuration constants per prompt spec
+const HERO: 'notes' | 'clock' = 'notes';
+const BILINGUAL = true;
+const GRAIN = true;
+
+const title = "The Town House: All-Day Cafe & Kitchen near Delhi Gate, Nahan";
+const description = "All-day cafe and kitchen near Delhi Gate, Nahan (HP). Indian, Indo-Chinese, Italian and continental, plus mocktails. Open daily 11 am–11 pm. 4.6★ on Google. Call 98829 90174.";
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "The Town House",
+  "description": "All-day cafe & kitchen",
+  "servesCuisine": ["North Indian", "Indo-Chinese", "Italian", "Continental"],
+  "telephone": "+91-98829-90174",
+  "email": "gujralshourya01@gmail.com",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "MC Complex, near Delhi Gate, Ramkundi",
+    "addressLocality": "Nahan",
+    "addressRegion": "Himachal Pradesh",
+    "postalCode": "173001",
+    "addressCountry": "IN"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "11:00",
+      "closes": "23:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.6",
+    "reviewCount": "129"
+  },
+  "acceptsReservations": "True"
+});
+---
+
+<Base
+  title={title}
+  description={description}
+  ogTitle="The Town House · Nahan"
+  ogDescription="All-day cafe & kitchen near Delhi Gate, Nahan. Open daily 11 am–11 pm."
+  ogImage="/assets/townhouse-logo-green.png"
+  schema={schema}
+  grain={GRAIN}
+>
+  <Header />
+
+  <main id="top">
+    {HERO === 'notes' ? (
+      <HeroNotes bilingual={BILINGUAL} />
+    ) : (
+      <HeroClock bilingual={BILINGUAL} />
+    )}
+
+    <OpenNowCard />
+
+    <ChapterDay bilingual={BILINGUAL} />
+
+    <MenuPreview bilingual={BILINGUAL} />
+
+    <RoomCollage bilingual={BILINGUAL} />
+
+    {HERO === 'clock' && <ReviewWall />}
+
+    <Parties bilingual={BILINGUAL} />
+
+    <Visit bilingual={BILINGUAL} />
+  </main>
+
+  <Footer bilingual={BILINGUAL} />
+
+  <QuickBar page="landing" />
+
+  <script>
+    import { getIST } from '../scripts/ist';
+
+    function istDate() {
+      return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+    }
+
+    // Live clock for clock hero
+    function setLiveClock() {
+      const c = document.querySelector('[data-liveclock]');
+      if (!c) return;
+      const t = istDate();
+      const m = t.getMinutes() + t.getSeconds() / 60;
+      const h = (t.getHours() % 12) + m / 60;
+      const hh = c.querySelector('[data-hand="h"]') as HTMLElement | null;
+      const mm = c.querySelector('[data-hand="m"]') as HTMLElement | null;
+      if (hh) hh.style.transform = `translateX(-50%) rotate(${h * 30}deg)`;
+      if (mm) mm.style.transform = `translateX(-50%) rotate(${m * 6}deg)`;
+    }
+
+    let rafId: number;
+    function loopClock() {
+      setLiveClock();
+      rafId = requestAnimationFrame(loopClock);
+    }
+
+    // Chapter clock sync on scroll
+    let curArt: Element | null = null;
+    function updateChapter() {
+      const clock = document.querySelector('[data-chapterclock]');
+      if (!clock) return;
+      const arts = Array.from(document.querySelectorAll('[data-hour]'));
+      if (!arts.length) return;
+      let cur = arts[0];
+      arts.forEach((a) => {
+        if (a.getBoundingClientRect().top < window.innerHeight * 0.55) {
+          cur = a;
+        }
+      });
+      if (!cur || cur === curArt) return;
+      curArt = cur;
+      const hr = parseInt(cur.getAttribute('data-hour') || '11', 10);
+      const hh = clock.querySelector('[data-hand="h"]') as HTMLElement | null;
+      const mm = clock.querySelector('[data-hand="m"]') as HTMLElement | null;
+      if (hh) hh.style.transform = `translateX(-50%) rotate(${hr * 30}deg)`;
+      if (mm) mm.style.transform = `translateX(-50%) rotate(${hr * 360}deg)`;
+      const lbl = document.querySelector('[data-chaplabel]');
+      if (lbl) {
+        lbl.textContent = `${String(hr).padStart(2, '0')}:00 · ${cur.getAttribute('data-label')}`;
+      }
+    }
+
+    // Refresh live open status
+    function updateOpenStatus() {
+      const { statusText, open } = getIST();
+      document.querySelectorAll('[data-status-text]').forEach((el) => {
+        el.textContent = statusText;
+      });
+      document.querySelectorAll('[data-status-dot]').forEach((elem) => {
+        const el = elem as HTMLElement;
+        el.style.background = open ? '#C4441E' : '#8B968F';
+        el.style.boxShadow = open ? '0 0 0 4px rgba(196,68,30,0.18)' : 'none';
+      });
+    }
+
+    function init() {
+      loopClock();
+      window.addEventListener('scroll', updateChapter, { passive: true });
+      setTimeout(updateChapter, 100);
+      const timer = setInterval(updateOpenStatus, 30000);
+      updateOpenStatus();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+</Base>
+

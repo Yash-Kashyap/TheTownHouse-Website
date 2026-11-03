@@ -1,0 +1,27 @@
+---
+import { getIST } from '../scripts/ist';
+
+const { statusText, open } = getIST();
+---
+
+<div style="padding:0 clamp(16px,4vw,64px);margin-top:-88px;position:relative;z-index:5">
+  <div data-reveal="" style="max-width:1232px;margin:0 auto;background:#FBF8F1;border:1px solid rgba(21,41,31,0.12);border-radius:24px;box-shadow:0 24px 48px -32px rgba(21,41,31,0.45);padding:24px clamp(16px,3vw,32px);display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px">
+    <div style="display:flex;align-items:center;gap:16px;flex:1 1 260px">
+      <span
+        aria-hidden="true"
+        data-status-dot
+        style={`width:12px;height:12px;border-radius:50%;flex:none;background:${open ? '#C4441E' : '#8B968F'};box-shadow:${open ? '0 0 0 4px rgba(196,68,30,0.18)' : 'none'}`}
+      ></span>
+      <div>
+        <p data-status-text aria-live="polite" style="margin:0;font-family:'Young Serif',serif;font-size:24px;line-height:1.2">{statusText}</p>
+        <p style="margin:0;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#4B5B51">Daily 11 am – 11 pm · Near Delhi Gate</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a href="tel:+919882990174" class="inline-flex items-center min-h-[48px] px-6 rounded-full bg-[#C4441E] hover:bg-[#A93815] text-[#FFF9F2] font-semibold text-[15px] no-underline transition-colors">Call 98829 90174</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=The+Town+House+MC+Complex+Delhi+Gate+Nahan" target="_blank" rel="noopener" class="inline-flex items-center min-h-[48px] px-6 rounded-full border-[1.5px] border-[#15291F] hover:bg-[#15291F] hover:text-[#F3EEE3] text-[#15291F] font-semibold text-[15px] no-underline transition-colors">Directions</a>
+      <a href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order" target="_blank" rel="noopener" class="inline-flex items-center min-h-[48px] px-6 rounded-full border-[1.5px] border-[rgba(21,41,31,0.25)] hover:border-[#15291F] hover:text-[#15291F] text-[#15291F] font-semibold text-[15px] no-underline transition-colors">Order on Zomato ↗</a>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+/assets/
+/scratch/
+/uploads/
+.thumbnail
+*.dc.html
+support.js

@@ -1,0 +1,57 @@
+---
+import { getIST } from '../scripts/ist';
+
+interface Props {
+  bilingual?: boolean;
+}
+
+const { bilingual = true } = Astro.props;
+const { days } = getIST();
+---
+
+<section id="visit" aria-labelledby="h-visit" style="padding:clamp(64px,10vw,128px) clamp(16px,4vw,64px) 0">
+  <div style="max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:flex-start;gap:48px clamp(48px,6vw,96px)">
+    <div data-reveal="" style="flex:5 1 340px;min-width:0;padding-bottom:96px">
+      <p style="margin:0 0 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">Find us</p>
+      <h2 id="h-visit" style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(2.25rem,4.4vw,4rem);line-height:1.05;letter-spacing:-0.025em;text-wrap:balance">By Delhi Gate, in MC Complex.</h2>
+      {bilingual && <p lang="hi" style="margin:16px 0 0;font-size:20px;font-weight:500;color:#0F3A2B">दिल्ली गेट के पास, एमसी कॉम्प्लेक्स।</p>}
+      <address style="font-style:normal;margin:24px 0 0;font-size:18px;line-height:1.55">MC Complex, near Delhi Gate, Ramkundi<br>Nahan, Himachal Pradesh 173001</address>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:24px">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Town+House+MC+Complex+Delhi+Gate+Nahan" target="_blank" rel="noopener" class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-[#C4441E] hover:bg-[#A93815] text-[#FFF9F2] font-semibold no-underline transition-colors">Get directions</a>
+        <a href="tel:+919882990174" class="inline-flex items-center min-h-[56px] px-8 rounded-full border-[1.5px] border-[#15291F] hover:bg-[#15291F] hover:text-[#F3EEE3] text-[#15291F] font-semibold no-underline transition-colors">Call 98829 90174</a>
+      </div>
+      <table style="width:100%;max-width:440px;margin-top:48px;border-collapse:collapse;font-size:16px">
+        <caption style="text-align:left;padding-bottom:8px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">Hours</caption>
+        <tbody>
+          {days.map((d) => (
+            <tr style="border-top:1px solid rgba(21,41,31,0.12)">
+              <th scope="row" style={`padding:12px 0;text-align:left;font-weight:${d.today ? 700 : 400};color:${d.today ? '#15291F' : '#4B5B51'}`}>{d.name}</th>
+              <td style={`padding:12px 0;text-align:right;font-variant-numeric:tabular-nums;font-weight:${d.today ? 700 : 400};color:${d.today ? '#15291F' : '#4B5B51'}`}>11 am – 11 pm</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p style="margin:16px 0 0;font-size:15px;color:#4B5B51">Festival days (like Diwali) may differ, so call ahead.</p>
+      <dl style="margin:32px 0 0;display:grid;grid-template-columns:auto 1fr;gap:8px 24px;font-size:15px">
+        <dt style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51;padding-top:2px">Pay</dt>
+        <dd style="margin:0">UPI · Cards · Cash</dd>
+        <dt style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51;padding-top:2px">For two</dt>
+        <dd style="margin:0">About ₹1,200 (approx.)</dd>
+        <dt style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51;padding-top:2px">Also</dt>
+        <dd style="margin:0">Dine-in · Takeaway · Delivery on <a href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order" target="_blank" rel="noopener">Zomato</a></dd>
+      </dl>
+    </div>
+    <div data-reveal="" style="flex:7 1 420px;min-width:0;position:relative;z-index:2;margin-bottom:-96px">
+      <div style="border-radius:24px;overflow:hidden;background:#E3E8DA;aspect-ratio:4/3;box-shadow:0 32px 64px -40px rgba(21,41,31,0.6);border:8px solid #FBF8F1">
+        <iframe
+          title="Map: The Town House, near Delhi Gate, Nahan"
+          src="https://www.google.com/maps?q=The+Town+House,+MC+Complex,+Delhi+Gate,+Nahan,+Himachal+Pradesh&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          style="border:0;width:100%;height:100%;display:block;filter:grayscale(0.6) sepia(0.15)"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,46 @@
+---
+interface Props {
+  bilingual?: boolean;
+}
+
+const { bilingual = true } = Astro.props;
+---
+
+<section aria-labelledby="h-hero2" style="padding:clamp(48px,7vw,96px) clamp(16px,4vw,64px) clamp(128px,14vw,176px)">
+  <div style="max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(48px,6vw,96px);align-items:center">
+    <div data-reveal="" style="flex:7 1 400px;min-width:0;position:relative;z-index:2">
+      <p style="margin:0 0 24px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">All-day cafe &amp; kitchen · Delhi Gate, Nahan</p>
+      <h1 id="h-hero2" style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(3.5rem,9vw,9rem);line-height:0.92;letter-spacing:-0.04em">Eleven to eleven.</h1>
+      {bilingual && <p lang="hi" style="margin:24px 0 0;font-size:22px;font-weight:500;color:#0F3A2B">सुबह 11 से रात 11 तक, रोज़।</p>}
+      <p style="margin:24px 0 0;max-width:44ch;color:#4B5B51;text-wrap:pretty">Twelve hours a day, every day, by Delhi Gate. Come in for a four o’clock chai and stay for tikka at nine.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:32px">
+        <a href="tel:+919882990174" class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-[#C4441E] hover:bg-[#A93815] text-[#FFF9F2] font-semibold no-underline transition-colors">Call to book a table</a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Town+House+MC+Complex+Delhi+Gate+Nahan" target="_blank" rel="noopener" class="inline-flex items-center min-h-[56px] px-8 rounded-full border-[1.5px] border-[#15291F] hover:bg-[#15291F] hover:text-[#F3EEE3] text-[#15291F] font-semibold no-underline transition-colors">Get directions</a>
+      </div>
+    </div>
+    <div style="flex:5 1 320px;min-width:0;max-width:560px;margin:0 auto;position:relative">
+      <div data-liveclock="" role="img" aria-label="Clock showing the current time in Nahan" style="position:relative;width:100%;aspect-ratio:1;border-radius:50%;background:#0F3A2B;box-shadow:inset 0 0 0 16px #0F3A2B,inset 0 0 0 19px #F3EEE3">
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(0deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">XII</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(30deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">I</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(60deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">II</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(90deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">III</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(120deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">IIII</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(150deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">V</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(180deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">VI</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(210deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">VII</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(240deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">VIII</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(270deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">IX</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(300deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">X</div>
+        <div style="position:absolute;left:50%;top:7%;height:43%;transform-origin:50% 100%;transform:translateX(-50%) rotate(330deg);font-family:'Young Serif',serif;color:#F3EEE3;font-size:clamp(16px,2.4vw,30px);line-height:1">XI</div>
+        <div data-hand="h" style="position:absolute;left:50%;bottom:50%;width:2.4%;height:25%;background:#F3EEE3;border-radius:8px;transform-origin:50% 100%;transform:translateX(-50%) rotate(300deg)"></div>
+        <div data-hand="m" style="position:absolute;left:50%;bottom:50%;width:1.4%;height:36%;background:#F3EEE3;border-radius:8px;transform-origin:50% 100%;transform:translateX(-50%) rotate(60deg)"></div>
+        <div style="position:absolute;left:50%;top:50%;width:5%;aspect-ratio:1;border-radius:50%;background:#C4441E;transform:translate(-50%,-50%)"></div>
+      </div>
+      <figure class="hover:[transform:rotate(0deg)_translateY(-8px)]" style="position:absolute;left:-8px;bottom:-32px;width:min(60%,240px);margin:0;background:#F1E3A6;padding:24px 20px;transform:rotate(-4deg);box-shadow:0 18px 24px -16px rgba(0,0,0,0.5);transition:transform .5s cubic-bezier(.16,1,.3,1)">
+        <blockquote style="margin:0;font-family:'Young Serif',serif;font-size:16px;line-height:1.35">“One of the best places to dine with friends and family in Nahan.”</blockquote>
+        <figcaption style="margin-top:16px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#4B4320">Sidharth C. · Google</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+

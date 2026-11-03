@@ -1,0 +1,26 @@
+---
+interface Props {
+  bilingual?: boolean;
+}
+
+const { bilingual = true } = Astro.props;
+---
+
+<section id="parties" aria-labelledby="h-parties" style="background:#0F3A2B;color:#F3EEE3;padding:clamp(64px,10vw,128px) clamp(16px,4vw,64px)">
+  <div style="max-width:1360px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px clamp(48px,6vw,96px);align-items:center">
+    <div data-reveal="" style="flex:6 1 360px;min-width:0">
+      <p style="margin:0 0 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#B9CBB8">Birthdays · private parties · reservations</p>
+      <h2 id="h-parties" style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(2.5rem,5.4vw,5rem);line-height:1.0;letter-spacing:-0.03em;text-wrap:balance">Turning a year older? Bring everyone.</h2>
+      {bilingual && <p lang="hi" style="margin:16px 0 0;font-size:20px;font-weight:500;color:#D3E4C6">जन्मदिन हो या पार्टी, बस एक कॉल करें।</p>}
+      <p style="margin:24px 0 0;max-width:46ch;color:#D6DFD2">We host birthdays and private parties. Call with the date and the headcount, and we’ll set the table.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:32px">
+        <a href="tel:+919882990174" class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-[#C4441E] hover:bg-[#D9562F] text-[#FFF9F2] font-semibold no-underline transition-colors">Call 98829 90174</a>
+        <a href="mailto:gujralshourya01@gmail.com" class="inline-flex items-center min-h-[56px] px-8 rounded-full border-[1.5px] border-[rgba(243,238,227,0.5)] hover:border-[#F3EEE3] text-[#F3EEE3] font-semibold no-underline transition-colors">Email us</a>
+      </div>
+    </div>
+    <div data-reveal="" style="flex:5 1 320px;min-width:0;position:relative">
+      <img src="/assets/photos/mocktails.png" alt="A shared table of pizza, pasta and four mocktails" loading="lazy" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:999px 999px 16px 16px">
+    </div>
+  </div>
+</section>
+

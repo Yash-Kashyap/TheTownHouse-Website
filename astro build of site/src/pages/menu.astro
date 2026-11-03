@@ -1,0 +1,345 @@
+---
+import Base from '../layouts/Base.astro';
+import QuickBar from '../components/QuickBar.astro';
+import { groups } from '../data/menu';
+
+const title = "Menu · The Town House, Nahan: All-Day Cafe & Kitchen";
+const description = "Full menu at The Town House, near Delhi Gate, Nahan: Indian starters and mains, momo, pizza, pasta, Indo-Chinese, shakes and more. Veg and non-veg.";
+
+// Flatten categories for the sticky tab list
+const allCats = groups.flatMap((g) => g.cats);
+---
+
+<Base title={title} description={description} grain={true}>
+  <header style="position:sticky;top:0;z-index:40;background:#F3EEE3">
+    <div style="max-width:1360px;margin:0 auto;padding:8px clamp(16px,4vw,64px);display:flex;align-items:center;gap:16px;min-height:64px;box-sizing:border-box">
+      <a href="/" aria-label="The Town House, home">
+        <img src="/assets/townhouse-logo-green.png" alt="The Town House" style="height:48px;width:auto;display:block" />
+      </a>
+      <a href="/" style="font-size:15px;font-weight:500;text-decoration:none;color:#15291F;padding:8px">← Home</a>
+      <a
+        href="tel:+919882990174"
+        class="ml-auto inline-flex items-center min-h-[44px] px-6 rounded-full bg-[#C4441E] hover:bg-[#A93815] text-[#FFF9F2] font-semibold text-[15px] no-underline transition-colors"
+      >
+        Call to order
+      </a>
+    </div>
+    <div style="border-top:1px solid rgba(21,41,31,0.1);border-bottom:1px solid rgba(21,41,31,0.1);background:#F3EEE3">
+      <div
+        data-tabbar=""
+        role="tablist"
+        aria-label="Menu categories"
+        style="max-width:1360px;margin:0 auto;padding:8px clamp(16px,4vw,64px);display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;box-sizing:border-box"
+      >
+        {allCats.map((c, idx) => (
+          <button
+            role="tab"
+            data-tab={c.id}
+            aria-selected={idx === 0 ? "true" : "false"}
+            style={`flex:none;min-height:44px;padding:0 16px;border:0;border-radius:999px;cursor:pointer;font-family:'Mukta',sans-serif;font-size:15px;font-weight:500;white-space:nowrap;background:${idx === 0 ? '#15291F' : 'transparent'};color:${idx === 0 ? '#F3EEE3' : '#15291F'};transition:background .3s`}
+          >
+            {c.name.replace(' · with dip & fries', '')}
+          </button>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <main style="max-width:1360px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(16px,4vw,64px) clamp(64px,10vw,128px)">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px 64px;margin-bottom:clamp(48px,6vw,80px)">
+      <div style="flex:2 1 420px">
+        <p style="margin:0 0 16px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">22 lists · 215 dishes and drinks</p>
+        <h1 style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(3.5rem,8vw,7.5rem);line-height:0.95;letter-spacing:-0.035em">The whole menu.</h1>
+        <p lang="hi" style="margin:16px 0 0;font-size:22px;font-weight:500;color:#0F3A2B">पूरा मेन्यू, सुबह 11 से रात 11 तक।</p>
+      </div>
+      <div style="flex:1 1 280px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+        <div role="radiogroup" aria-label="Filter" style="display:flex;gap:4px;padding:4px;border-radius:999px;background:#E3E8DA">
+          <button
+            role="radio"
+            data-filter-btn="all"
+            aria-checked="true"
+            style="min-height:44px;padding:0 20px;border:0;border-radius:999px;cursor:pointer;font-family:'Mukta',sans-serif;font-size:15px;font-weight:600;background:#FBF8F1;color:#15291F;box-shadow:0 2px 8px -4px rgba(21,41,31,0.4)"
+          >
+            All
+          </button>
+          <button
+            role="radio"
+            data-filter-btn="veg"
+            aria-checked="false"
+            style="min-height:44px;padding:0 20px;border:0;border-radius:999px;cursor:pointer;font-family:'Mukta',sans-serif;font-size:15px;font-weight:600;background:transparent;color:#15291F;box-shadow:none"
+          >
+            Veg
+          </button>
+          <button
+            role="radio"
+            data-filter-btn="nonveg"
+            aria-checked="false"
+            style="min-height:44px;padding:0 20px;border:0;border-radius:999px;cursor:pointer;font-family:'Mukta',sans-serif;font-size:15px;font-weight:600;background:transparent;color:#15291F;box-shadow:none"
+          >
+            Non-veg
+          </button>
+        </div>
+        <p style="margin:0;font-size:13px;color:#4B5B51;max-width:36ch">
+          Prices in ₹. Tell us about allergies when you order. To order, call or use <a href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order" target="_blank" rel="noopener" style="font-weight:600">Zomato</a>.
+        </p>
+      </div>
+    </div>
+
+    {groups.map((g) => (
+      <section style="padding-top:48px;border-top:1.5px solid #15291F;margin-bottom:clamp(64px,8vw,112px)">
+        <div style="display:flex;align-items:baseline;gap:16px 24px;flex-wrap:wrap;margin-bottom:32px">
+          <span style="font-family:'Young Serif',serif;font-size:clamp(3rem,6vw,5rem);line-height:0.9;letter-spacing:-0.04em">{g.time}</span>
+          <h2 style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(1.5rem,2.4vw,2rem)">{g.title}</h2>
+          <span lang="hi" style="font-size:15px;font-weight:600;color:#4B5B51">{g.hi}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:32px clamp(32px,5vw,80px)">
+          {g.cats.map((c) => {
+            const phCount = c.items.length ? 0 : Math.min(c.count, 3);
+            const todo = c.items.some((i) => i.sample)
+              ? `Sample dishes · + ${c.count - c.items.length} more · confirm names & ₹ with owner`
+              : `+ ${c.count - c.items.length} more · to add from owner’s menu`;
+
+            return (
+              <div id={c.id} data-cat={c.id} style="background:#FBF8F1;border-radius:16px;padding:clamp(24px,3vw,40px);scroll-margin-top:144px">
+                <div style="display:flex;align-items:center;gap:24px;padding-bottom:24px;border-bottom:1px solid rgba(21,41,31,0.14)">
+                  <img
+                    src={c.img}
+                    alt={c.alt}
+                    loading="lazy"
+                    style="flex:none;width:clamp(112px,12vw,160px);aspect-ratio:1;object-fit:cover;display:block;border-radius:12px;border:6px solid #FFFFFF;box-sizing:border-box;box-shadow:0 12px 24px -16px rgba(21,41,31,0.5);transform:rotate(-2deg)"
+                  />
+                  <div style="min-width:0;display:flex;flex-direction:column;gap:8px">
+                    <h3 style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(1.5rem,2.2vw,1.875rem);line-height:1.15">{c.name}</h3>
+                    <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">{c.count} items</span>
+                    <span style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6A766E">{c.credit}</span>
+                  </div>
+                </div>
+
+                {/* Real items */}
+                {c.items.map((it) => {
+                  const veg = it.t === 'veg';
+                  const clr = veg ? '#2F7D3A' : '#8A3A1E';
+                  return (
+                    <div
+                      class="menu-dish-row"
+                      data-dish-type={it.t}
+                      style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(21,41,31,0.08)"
+                    >
+                      <span
+                        aria-label={veg ? 'Veg' : 'Non-veg'}
+                        style={`width:14px;height:14px;border:1.5px solid ${clr};display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;transform:translateY(2px)`}
+                      >
+                        {veg ? (
+                          <span style={`width:6px;height:6px;border-radius:50%;background:${clr}`} />
+                        ) : (
+                          <span style={`width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid ${clr}`} />
+                        )}
+                      </span>
+                      <span style="font-family:'Young Serif',serif;font-size:20px;line-height:1.25">{it.name}</span>
+                      <span style={`font-weight:600;font-variant-numeric:tabular-nums;text-align:right;color:${it.sample ? '#8B968F' : '#15291F'}`}>
+                        {it.price}
+                      </span>
+                      <span></span>
+                      <span style="font-size:15px;color:#4B5B51;line-height:1.5">{it.desc}</span>
+                      <span></span>
+                    </div>
+                  );
+                })}
+
+                {/* Placeholders if needed */}
+                {Array.from({ length: phCount }).map(() => (
+                  <div
+                    class="menu-dish-row"
+                    data-dish-type="placeholder"
+                    style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(21,41,31,0.08);opacity:0.7"
+                  >
+                    <span
+                      aria-label="To confirm"
+                      style="width:14px;height:14px;border:1.5px dashed rgba(21,41,31,0.25);display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;transform:translateY(2px)"
+                    />
+                    <span style="font-family:'Young Serif',serif;font-size:20px;line-height:1.25;color:#6A766E">[Dish name]</span>
+                    <span style="font-weight:600;color:#6A766E;text-align:right">₹ —</span>
+                    <span></span>
+                    <span style="font-size:15px;color:#4B5B51;line-height:1.5">[Short description]</span>
+                    <span></span>
+                  </div>
+                ))}
+
+                <p style="margin:16px 0 0;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#6B5A2A">{todo}</p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    <div style="background:#0F3A2B;color:#F3EEE3;border-radius:32px;padding:clamp(40px,6vw,80px);display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
+      <h2 style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-0.025em;max-width:18ch">
+        Decided? We’re open till 11.
+      </h2>
+      <div style="display:flex;flex-wrap:wrap;gap:16px">
+        <a
+          href="tel:+919882990174"
+          class="inline-flex items-center min-h-[56px] px-8 rounded-full bg-[#C4441E] hover:bg-[#D9562F] text-[#FFF9F2] font-semibold no-underline transition-colors"
+        >
+          Call 98829 90174
+        </a>
+        <a
+          href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center min-h-[56px] px-8 rounded-full border-[1.5px] border-[rgba(243,238,227,0.5)] hover:border-[#F3EEE3] text-[#F3EEE3] font-semibold no-underline transition-colors"
+        >
+          Order on Zomato ↗
+        </a>
+      </div>
+    </div>
+
+    <div style="margin:48px 0 0;display:flex;flex-wrap:wrap;gap:12px">
+      <a
+        href="https://www.instagram.com/thetownhousee/"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(21,41,31,0.35)] hover:border-[#15291F] text-[#15291F] font-semibold text-[17px] no-underline transition-colors"
+      >
+        Instagram
+      </a>
+      <a
+        href="https://www.google.com/maps/search/?api=1&query=The+Town+House+Nahan"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(21,41,31,0.35)] hover:border-[#15291F] text-[#15291F] font-semibold text-[17px] no-underline transition-colors"
+      >
+        Google Maps
+      </a>
+      <a
+        href="tel:+919882990174"
+        class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(21,41,31,0.35)] hover:border-[#15291F] text-[#15291F] font-semibold text-[17px] no-underline transition-colors"
+      >
+        +91 98829 90174
+      </a>
+      <a
+        href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order"
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(21,41,31,0.35)] hover:border-[#15291F] text-[#15291F] font-semibold text-[17px] no-underline transition-colors"
+      >
+        Zomato
+      </a>
+    </div>
+
+    <p style="margin:32px 0 0;text-align:right;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#4B5B51">
+      Website by Yash Kashyap · <a href="mailto:yashkashyap1110@gmail.com" class="text-[#4B5B51] hover:text-[#15291F]">yashkashyap1110@gmail.com</a> · <a href="tel:+917876331526" class="text-[#4B5B51] hover:text-[#15291F]">787 633 1526</a>
+    </p>
+  </main>
+
+  <div class="h-[72px] block min-[760px]:hidden"></div>
+  <QuickBar page="menu" />
+
+  <script>
+    let activeTabId = 'soup';
+    let currentFilter = 'all';
+
+    function setActiveTab(id: string) {
+      if (activeTabId === id) return;
+      activeTabId = id;
+
+      const bar = document.querySelector('[data-tabbar]');
+      if (!bar) return;
+
+      const tabs = bar.querySelectorAll<HTMLButtonElement>('[data-tab]');
+      tabs.forEach((t) => {
+        const isCurrent = t.getAttribute('data-tab') === id;
+        t.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+        t.style.background = isCurrent ? '#15291F' : 'transparent';
+        t.style.color = isCurrent ? '#F3EEE3' : '#15291F';
+      });
+
+      const activeTab = bar.querySelector<HTMLElement>(`[data-tab="${id}"]`);
+      if (activeTab) {
+        bar.scrollTo({ left: activeTab.offsetLeft - 64, behavior: 'smooth' });
+      }
+    }
+
+    function scrollToCategory(id: string) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      window.scrollTo({
+        top: el.getBoundingClientRect().top + window.scrollY - 144,
+        behavior: 'smooth',
+      });
+      setActiveTab(id);
+    }
+
+    function spy() {
+      let cur: string | null = null;
+      document.querySelectorAll('[data-cat]').forEach((elem) => {
+        if (elem.getBoundingClientRect().top < 200) {
+          cur = elem.getAttribute('data-cat');
+        }
+      });
+      if (cur && cur !== activeTabId) {
+        setActiveTab(cur);
+      }
+    }
+
+    function applyFilter(filter: 'all' | 'veg' | 'nonveg') {
+      currentFilter = filter;
+      const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]');
+      buttons.forEach((btn) => {
+        const isSelected = btn.getAttribute('data-filter-btn') === filter;
+        btn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+        btn.style.background = isSelected ? '#FBF8F1' : 'transparent';
+        btn.style.boxShadow = isSelected ? '0 2px 8px -4px rgba(21,41,31,0.4)' : 'none';
+      });
+
+      const rows = document.querySelectorAll<HTMLElement>('.menu-dish-row');
+      rows.forEach((row) => {
+        const dishType = row.getAttribute('data-dish-type');
+        if (filter === 'all' || dishType === 'placeholder' || dishType === filter) {
+          row.style.display = 'grid';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    function initMenu() {
+      // Tab click events
+      document.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-tab');
+          if (id) scrollToCategory(id);
+        });
+      });
+
+      // Filter click events
+      document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const f = btn.getAttribute('data-filter-btn') as 'all' | 'veg' | 'nonveg';
+          if (f) applyFilter(f);
+        });
+      });
+
+      // Scroll spy
+      window.addEventListener('scroll', spy, { passive: true });
+
+      // Handle hash in URL on load & on hashchange
+      const handleHash = () => {
+        const hash = (location.hash || '').slice(1);
+        if (hash) {
+          setTimeout(() => scrollToCategory(hash), 300);
+        }
+      };
+
+      handleHash();
+      window.addEventListener('hashchange', handleHash);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMenu);
+    } else {
+      initMenu();
+    }
+  </script>
+</Base>

@@ -1,0 +1,88 @@
+---
+import { getIST } from '../scripts/ist';
+
+interface Props {
+  bilingual?: boolean;
+}
+
+const { bilingual = true } = Astro.props;
+const { statusText, open } = getIST();
+---
+
+<footer style="background:#15291F;color:#F3EEE3;padding:calc(96px + clamp(48px,5vw,72px)) clamp(16px,4vw,64px) 40px">
+  <div style="max-width:1360px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px 64px">
+      <div style="flex:1 1 420px;min-width:0">
+        <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#A9BBA9">The Town House · Nahan</p>
+        <h2 style="margin:0;font-family:'Young Serif',serif;font-weight:400;font-size:clamp(2.75rem,6vw,5.5rem);line-height:0.98;letter-spacing:-0.035em;text-wrap:balance">Pull up a chair. We’re here till eleven.</h2>
+        {bilingual && <p lang="hi" style="margin:16px 0 0;font-size:20px;font-weight:500;color:#D6DFD2">आइए, बैठिए — रात 11 बजे तक खुले हैं।</p>}
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;flex:0 1 auto">
+        <a href="https://www.instagram.com/thetownhousee/" target="_blank" rel="noopener" class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(243,238,227,0.35)] hover:border-[#F3EEE3] text-[#F3EEE3] font-semibold text-[17px] no-underline transition-colors">Instagram</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=The+Town+House+Nahan" target="_blank" rel="noopener" class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(243,238,227,0.35)] hover:border-[#F3EEE3] text-[#F3EEE3] font-semibold text-[17px] no-underline transition-colors">Google Maps</a>
+        <a href="tel:+919882990174" class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(243,238,227,0.35)] hover:border-[#F3EEE3] text-[#F3EEE3] font-semibold text-[17px] no-underline transition-colors">+91 98829 90174</a>
+        <a href="https://www.zomato.com/nahan/the-town-house-nahan-locality/order" target="_blank" rel="noopener" class="inline-flex items-center min-h-[52px] px-7 rounded-full border-[1.5px] border-[rgba(243,238,227,0.35)] hover:border-[#F3EEE3] text-[#F3EEE3] font-semibold text-[17px] no-underline transition-colors">Zomato</a>
+      </div>
+    </div>
+
+    <!-- 6-photo strip: 6 cols at >= 760px, 3 cols otherwise -->
+    <a href="https://www.instagram.com/thetownhousee/" target="_blank" rel="noopener" aria-label="More photos on Instagram" class="grid grid-cols-3 min-[760px]:grid-cols-6 gap-3 no-underline" style="margin-top:clamp(48px,6vw,80px)">
+      <img src="/assets/photos/arch.png" alt="The sticky-note arch" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:16px">
+      <img src="/assets/photos/sage-wall.png" alt="Sage walls inside" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:16px">
+      <img src="/assets/photos/mocktails.png" alt="Mocktails on the table" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:16px">
+      <img src="/assets/photos/window-tables.png" alt="Window tables" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:16px">
+      <img src="/assets/photos/momos.png" alt="Momos" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:16px">
+      <img src="/assets/photos/bw-frames.png" alt="Black-and-white frames on the wall" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;display:block;border-radius:16px">
+    </a>
+
+    <!-- Info grid -->
+    <div class="grid grid-cols-1 min-[600px]:grid-cols-2 min-[1100px]:grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] gap-x-12 gap-y-10" style="margin-top:clamp(48px,6vw,80px);padding-top:clamp(40px,5vw,64px);border-top:1px solid rgba(243,238,227,0.14);font-size:16px;line-height:1.55">
+      <div class="min-[600px]:max-[1099px]:col-span-full">
+        <img src="/assets/townhouse-logo-white.png" alt="The Town House" style="width:clamp(150px,16vw,210px);height:auto;display:block;opacity:0.95">
+        <p style="margin:20px 0 0;max-width:28ch;color:#D6DFD2">All-day cafe &amp; kitchen by Delhi Gate. Chai at four, tikka at nine.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#A9BBA9">Visit</p>
+        <address style="font-style:normal;color:#F3EEE3">MC Complex, near Delhi Gate<br>Ramkundi, Nahan<br>Himachal Pradesh 173001</address>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=The+Town+House+MC+Complex+Delhi+Gate+Nahan" target="_blank" rel="noopener" class="inline-block mt-3 font-semibold text-[#F1E3A6] hover:text-[#F3EEE3]">Get directions ↗</a>
+      </div>
+      <div>
+        <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#A9BBA9">Hours</p>
+        <p style="margin:0">Every day<br>11 am – 11 pm</p>
+        <p style="margin:12px 0 0;display:flex;align-items:center;gap:10px;color:#D6DFD2">
+          <span aria-hidden="true" data-status-dot style={`width:12px;height:12px;border-radius:50%;flex:none;background:${open ? '#C4441E' : '#8B968F'};box-shadow:${open ? '0 0 0 4px rgba(196,68,30,0.18)' : 'none'}`}></span>
+          <span data-status-text>{statusText}</span>
+        </p>
+      </div>
+      <div>
+        <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#A9BBA9">Explore</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="/menu" class="text-[#F3EEE3] no-underline hover:text-[#F1E3A6]">Full menu</a>
+          <a href="#day" class="text-[#F3EEE3] no-underline hover:text-[#F1E3A6]">The day, hour by hour</a>
+          <a href="#parties" class="text-[#F3EEE3] no-underline hover:text-[#F1E3A6]">Parties &amp; birthdays</a>
+          <a href="#visit" class="text-[#F3EEE3] no-underline hover:text-[#F1E3A6]">Find us</a>
+        </div>
+      </div>
+      <div>
+        <p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#A9BBA9">Get in touch</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <a href="tel:+919882990174" class="text-[#F3EEE3] no-underline hover:text-[#F1E3A6]">98829 90174</a>
+          <a href="mailto:gujralshourya01@gmail.com" class="text-[#F3EEE3] no-underline break-all hover:text-[#F1E3A6]">gujralshourya01@gmail.com</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=The+Town+House+Nahan" target="_blank" rel="noopener" class="text-[#F3EEE3] no-underline hover:text-[#F1E3A6]">4.6 ★ on Google ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="margin-top:clamp(48px,6vw,72px);padding-top:24px;border-top:1px solid rgba(243,238,227,0.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:13px;color:#A9BBA9">
+      <span>© 2026 The Town House · All-Day Cafe &amp; Kitchen, Nahan</span>
+      <span style="font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">
+        Website by Yash Kashyap · <a href="mailto:yashkashyap1110@gmail.com" class="text-[#A9BBA9] hover:text-[#F3EEE3]">yashkashyap1110@gmail.com</a> · <a href="tel:+917876331526" class="text-[#A9BBA9] hover:text-[#F3EEE3]">787 633 1526</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Spacer when narrow (< 760px) -->
+  <div class="h-16 block min-[760px]:hidden"></div>
+</footer>
+
